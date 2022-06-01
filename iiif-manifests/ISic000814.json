@@ -1,0 +1,408 @@
+{
+   "@context": "http://iiif.io/api/presentation/3/context.json",
+   "id": "http://sicily.classics.ox.ac.uk/ISic000814/manifest.json",
+   "type": "Manifest",
+   "label": {
+      "en": [
+         "ISic000814"
+      ]
+   },
+   "items": [
+      {
+         "id": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p0",
+         "type": "Canvas",
+         "label": {
+            "en": [
+               "Photo J. Prag, courtesy Museo Regionale Archeologico Pietro Griffo"
+            ]
+         },
+         "height": 2832,
+         "width": 5040,
+         "items": [
+            {
+               "id": "http://sicily.classics.ox.ac.uk/ISic000814/page/p0/0",
+               "type": "AnnotationPage",
+               "items": [
+                  {
+                     "id": "http://sicily.classics.ox.ac.uk/ISic000814/annotation/p0-image",
+                     "type": "Annotation",
+                     "motivation": "painting",
+                     "body": {
+                        "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy1_tiled.tif/full/max/0/default.jpg",
+                        "type": "Image",
+                        "format": "image/jpeg",
+                        "requiredStatement": {
+                           "label": {
+                              "en": [
+                                 "Attribution"
+                              ]
+                           },
+                           "value": {
+                              "en": [
+                                 "<span>Published by I.Sicily online under <a href='https://creativecommons.org/licenses/by-sa/4.0'>CC BY-SA 4.0</a> <a href='https://creativecommons.org/licenses/by-sa/4.0' title='CC BY-SA 4.0'><img src='https://licensebuttons.net/l/by-sa/4.0/88x31.png'/></a> with the permission of the Assessorato Regionale dei Beni Culturali e dell’Identità Siciliana - Dipartimento dei Beni Culturali e dell’Identità Siciliana, under the terms of the convention of 17.01.2022.</span>"
+                              ]
+                           }
+                        },
+                        "rights": "http://creativecommons.org/licenses/by/4.0/",
+                        "metadata": [
+                           {
+                              "label": {
+                                 "en": [
+                                    "Inscription Type"
+                                 ]
+                              },
+                              "value": {
+                                 "en": [
+                                    "squeeze"
+                                 ]
+                              }
+                           }
+                        ],
+                        "height": 2832,
+                        "width": 5040,
+                        "service": [
+                           {
+                              "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy1_tiled.tif",
+                              "profile": "level1",
+                              "type": "ImageService3"
+                           }
+                        ]
+                     },
+                     "target": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p0"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p1",
+         "type": "Canvas",
+         "label": {
+            "en": [
+               "Photo J. Prag, courtesy Museo Regionale Archeologico Pietro Griffo"
+            ]
+         },
+         "height": 2832,
+         "width": 5040,
+         "items": [
+            {
+               "id": "http://sicily.classics.ox.ac.uk/ISic000814/page/p1/1",
+               "type": "AnnotationPage",
+               "items": [
+                  {
+                     "id": "http://sicily.classics.ox.ac.uk/ISic000814/annotation/p1-image",
+                     "type": "Annotation",
+                     "motivation": "painting",
+                     "body": {
+                        "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy1.jpg/full/max/0/default.jpg",
+                        "type": "Image",
+                        "format": "image/jpeg",
+                        "requiredStatement": {
+                           "label": {
+                              "en": [
+                                 "Attribution"
+                              ]
+                           },
+                           "value": {
+                              "en": [
+                                 "<span>Published by I.Sicily online under <a href='https://creativecommons.org/licenses/by-sa/4.0'>CC BY-SA 4.0</a> <a href='https://creativecommons.org/licenses/by-sa/4.0' title='CC BY-SA 4.0'><img src='https://licensebuttons.net/l/by-sa/4.0/88x31.png'/></a> with the permission of the Assessorato Regionale dei Beni Culturali e dell’Identità Siciliana - Dipartimento dei Beni Culturali e dell’Identità Siciliana, under the terms of the convention of 17.01.2022.</span>"
+                              ]
+                           }
+                        },
+                        "rights": "http://creativecommons.org/licenses/by/4.0/",
+                        "metadata": [
+                           {
+                              "label": {
+                                 "en": [
+                                    "Inscription Type"
+                                 ]
+                              },
+                              "value": {
+                                 "en": [
+                                    "squeeze"
+                                 ]
+                              }
+                           }
+                        ],
+                        "height": 2832,
+                        "width": 5040,
+                        "service": [
+                           {
+                              "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy1.jpg",
+                              "profile": "level1",
+                              "type": "ImageService3"
+                           }
+                        ]
+                     },
+                     "target": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p1"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p2",
+         "type": "Canvas",
+         "label": {
+            "en": [
+               "Photo J. Prag, courtesy Museo Regionale Archeologico Pietro Griffo"
+            ]
+         },
+         "height": 3680,
+         "width": 5520,
+         "items": [
+            {
+               "id": "http://sicily.classics.ox.ac.uk/ISic000814/page/p2/2",
+               "type": "AnnotationPage",
+               "items": [
+                  {
+                     "id": "http://sicily.classics.ox.ac.uk/ISic000814/annotation/p2-image",
+                     "type": "Annotation",
+                     "motivation": "painting",
+                     "body": {
+                        "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy2_tiled.tif/full/max/0/default.jpg",
+                        "type": "Image",
+                        "format": "image/jpeg",
+                        "requiredStatement": {
+                           "label": {
+                              "en": [
+                                 "Attribution"
+                              ]
+                           },
+                           "value": {
+                              "en": [
+                                 "<span>Published by I.Sicily online under <a href='https://creativecommons.org/licenses/by-sa/4.0'>CC BY-SA 4.0</a> <a href='https://creativecommons.org/licenses/by-sa/4.0' title='CC BY-SA 4.0'><img src='https://licensebuttons.net/l/by-sa/4.0/88x31.png'/></a> with the permission of the Assessorato Regionale dei Beni Culturali e dell’Identità Siciliana - Dipartimento dei Beni Culturali e dell’Identità Siciliana, under the terms of the convention of 17.01.2022.</span>"
+                              ]
+                           }
+                        },
+                        "rights": "http://creativecommons.org/licenses/by/4.0/",
+                        "metadata": [
+                           {
+                              "label": {
+                                 "en": [
+                                    "Inscription Type"
+                                 ]
+                              },
+                              "value": {
+                                 "en": [
+                                    "squeeze"
+                                 ]
+                              }
+                           }
+                        ],
+                        "height": 3680,
+                        "width": 5520,
+                        "service": [
+                           {
+                              "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy2_tiled.tif",
+                              "profile": "level1",
+                              "type": "ImageService3"
+                           }
+                        ]
+                     },
+                     "target": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p2"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p3",
+         "type": "Canvas",
+         "label": {
+            "en": [
+               "Photo J. Prag, courtesy Museo Regionale Archeologico Pietro Griffo"
+            ]
+         },
+         "height": 3680,
+         "width": 5520,
+         "items": [
+            {
+               "id": "http://sicily.classics.ox.ac.uk/ISic000814/page/p3/3",
+               "type": "AnnotationPage",
+               "items": [
+                  {
+                     "id": "http://sicily.classics.ox.ac.uk/ISic000814/annotation/p3-image",
+                     "type": "Annotation",
+                     "motivation": "painting",
+                     "body": {
+                        "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy2.jpg/full/max/0/default.jpg",
+                        "type": "Image",
+                        "format": "image/jpeg",
+                        "requiredStatement": {
+                           "label": {
+                              "en": [
+                                 "Attribution"
+                              ]
+                           },
+                           "value": {
+                              "en": [
+                                 "<span>Published by I.Sicily online under <a href='https://creativecommons.org/licenses/by-sa/4.0'>CC BY-SA 4.0</a> <a href='https://creativecommons.org/licenses/by-sa/4.0' title='CC BY-SA 4.0'><img src='https://licensebuttons.net/l/by-sa/4.0/88x31.png'/></a> with the permission of the Assessorato Regionale dei Beni Culturali e dell’Identità Siciliana - Dipartimento dei Beni Culturali e dell’Identità Siciliana, under the terms of the convention of 17.01.2022.</span>"
+                              ]
+                           }
+                        },
+                        "rights": "http://creativecommons.org/licenses/by/4.0/",
+                        "metadata": [
+                           {
+                              "label": {
+                                 "en": [
+                                    "Inscription Type"
+                                 ]
+                              },
+                              "value": {
+                                 "en": [
+                                    "squeeze"
+                                 ]
+                              }
+                           }
+                        ],
+                        "height": 3680,
+                        "width": 5520,
+                        "service": [
+                           {
+                              "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy2.jpg",
+                              "profile": "level1",
+                              "type": "ImageService3"
+                           }
+                        ]
+                     },
+                     "target": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p3"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p4",
+         "type": "Canvas",
+         "label": {
+            "en": [
+               "Photo J. Prag, courtesy Museo Regionale Archeologico Pietro Griffo"
+            ]
+         },
+         "height": 3680,
+         "width": 5520,
+         "items": [
+            {
+               "id": "http://sicily.classics.ox.ac.uk/ISic000814/page/p4/4",
+               "type": "AnnotationPage",
+               "items": [
+                  {
+                     "id": "http://sicily.classics.ox.ac.uk/ISic000814/annotation/p4-image",
+                     "type": "Annotation",
+                     "motivation": "painting",
+                     "body": {
+                        "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy3_tiled.tif/full/max/0/default.jpg",
+                        "type": "Image",
+                        "format": "image/jpeg",
+                        "requiredStatement": {
+                           "label": {
+                              "en": [
+                                 "Attribution"
+                              ]
+                           },
+                           "value": {
+                              "en": [
+                                 "<span>Published by I.Sicily online under <a href='https://creativecommons.org/licenses/by-sa/4.0'>CC BY-SA 4.0</a> <a href='https://creativecommons.org/licenses/by-sa/4.0' title='CC BY-SA 4.0'><img src='https://licensebuttons.net/l/by-sa/4.0/88x31.png'/></a> with the permission of the Assessorato Regionale dei Beni Culturali e dell’Identità Siciliana - Dipartimento dei Beni Culturali e dell’Identità Siciliana, under the terms of the convention of 17.01.2022.</span>"
+                              ]
+                           }
+                        },
+                        "rights": "http://creativecommons.org/licenses/by/4.0/",
+                        "metadata": [
+                           {
+                              "label": {
+                                 "en": [
+                                    "Inscription Type"
+                                 ]
+                              },
+                              "value": {
+                                 "en": [
+                                    "squeeze"
+                                 ]
+                              }
+                           }
+                        ],
+                        "height": 3680,
+                        "width": 5520,
+                        "service": [
+                           {
+                              "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy3_tiled.tif",
+                              "profile": "level1",
+                              "type": "ImageService3"
+                           }
+                        ]
+                     },
+                     "target": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p4"
+                  }
+               ]
+            }
+         ]
+      },
+      {
+         "id": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p5",
+         "type": "Canvas",
+         "label": {
+            "en": [
+               "Photo J. Prag, courtesy Museo Regionale Archeologico Pietro Griffo"
+            ]
+         },
+         "height": 3680,
+         "width": 5520,
+         "items": [
+            {
+               "id": "http://sicily.classics.ox.ac.uk/ISic000814/page/p5/5",
+               "type": "AnnotationPage",
+               "items": [
+                  {
+                     "id": "http://sicily.classics.ox.ac.uk/ISic000814/annotation/p5-image",
+                     "type": "Annotation",
+                     "motivation": "painting",
+                     "body": {
+                        "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy3.jpg/full/max/0/default.jpg",
+                        "type": "Image",
+                        "format": "image/jpeg",
+                        "requiredStatement": {
+                           "label": {
+                              "en": [
+                                 "Attribution"
+                              ]
+                           },
+                           "value": {
+                              "en": [
+                                 "<span>Published by I.Sicily online under <a href='https://creativecommons.org/licenses/by-sa/4.0'>CC BY-SA 4.0</a> <a href='https://creativecommons.org/licenses/by-sa/4.0' title='CC BY-SA 4.0'><img src='https://licensebuttons.net/l/by-sa/4.0/88x31.png'/></a> with the permission of the Assessorato Regionale dei Beni Culturali e dell’Identità Siciliana - Dipartimento dei Beni Culturali e dell’Identità Siciliana, under the terms of the convention of 17.01.2022.</span>"
+                              ]
+                           }
+                        },
+                        "rights": "http://creativecommons.org/licenses/by/4.0/",
+                        "metadata": [
+                           {
+                              "label": {
+                                 "en": [
+                                    "Inscription Type"
+                                 ]
+                              },
+                              "value": {
+                                 "en": [
+                                    "squeeze"
+                                 ]
+                              }
+                           }
+                        ],
+                        "height": 3680,
+                        "width": 5520,
+                        "service": [
+                           {
+                              "id": "http://localhost:8182/iiif/3/ISic000814__ISic000814_copy3.jpg",
+                              "profile": "level1",
+                              "type": "ImageService3"
+                           }
+                        ]
+                     },
+                     "target": "http://sicily.classics.ox.ac.uk/ISic000814/canvas/p5"
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

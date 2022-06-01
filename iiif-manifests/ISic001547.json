@@ -1,0 +1,78 @@
+{
+   "@context": "http://iiif.io/api/presentation/3/context.json",
+   "id": "http://sicily.classics.ox.ac.uk/ISic001547/manifest.json",
+   "type": "Manifest",
+   "label": {
+      "en": [
+         "ISic001547"
+      ]
+   },
+   "items": [
+      {
+         "id": "http://sicily.classics.ox.ac.uk/ISic001547/canvas/p0",
+         "type": "Canvas",
+         "label": {
+            "en": [
+               "Photo J. Prag, courtesy  Museo Archeologico Regionale Antonino Salinas"
+            ]
+         },
+         "height": 2832,
+         "width": 3764,
+         "items": [
+            {
+               "id": "http://sicily.classics.ox.ac.uk/ISic001547/page/p0/0",
+               "type": "AnnotationPage",
+               "items": [
+                  {
+                     "id": "http://sicily.classics.ox.ac.uk/ISic001547/annotation/p0-image",
+                     "type": "Annotation",
+                     "motivation": "painting",
+                     "body": {
+                        "id": "http://localhost:8182/iiif/3/ISic001547__ISic001547_tiled.tif/full/max/0/default.jpg",
+                        "type": "Image",
+                        "format": "image/jpeg",
+                        "requiredStatement": {
+                           "label": {
+                              "en": [
+                                 "Attribution"
+                              ]
+                           },
+                           "value": {
+                              "en": [
+                                 "<span>Published by I.Sicily online under <a href='https://creativecommons.org/licenses/by-sa/4.0'>CC BY-SA 4.0</a> <a href='https://creativecommons.org/licenses/by-sa/4.0' title='CC BY-SA 4.0'><img src='https://licensebuttons.net/l/by-sa/4.0/88x31.png'/></a> with the permission of the Assessorato Regionale dei Beni Culturali e dell’Identità Siciliana - Dipartimento dei Beni Culturali e dell’Identità Siciliana, under the terms of the convention of 17.01.2022.</span>"
+                              ]
+                           }
+                        },
+                        "rights": "http://creativecommons.org/licenses/by/4.0/",
+                        "metadata": [
+                           {
+                              "label": {
+                                 "en": [
+                                    "Inscription Type"
+                                 ]
+                              },
+                              "value": {
+                                 "en": [
+                                    "squeeze"
+                                 ]
+                              }
+                           }
+                        ],
+                        "height": 2832,
+                        "width": 3764,
+                        "service": [
+                           {
+                              "id": "http://localhost:8182/iiif/3/ISic001547__ISic001547_tiled.tif",
+                              "profile": "level1",
+                              "type": "ImageService3"
+                           }
+                        ]
+                     },
+                     "target": "http://sicily.classics.ox.ac.uk/ISic001547/canvas/p0"
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}

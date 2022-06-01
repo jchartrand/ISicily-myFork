@@ -1,0 +1,11 @@
+{
+   "@context": "http://iiif.io/api/presentation/3/context.json",
+   "id": "http://sicily.classics.ox.ac.uk/ISic000927/manifest.json",
+   "type": "Manifest",
+   "label": {
+      "en": [
+         "ISic000927"
+      ]
+   },
+   "items": []
+}
