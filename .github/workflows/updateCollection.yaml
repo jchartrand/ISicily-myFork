@@ -12,7 +12,7 @@ jobs:
     name: Updates collection files
     steps:
       - name: Update files
-        uses: jchartrand/ISicily-myFork@main
+        uses: jchartrand/ISicily-myFork@master
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
