@@ -12,7 +12,7 @@ jobs:
     name: Updates collection files
     steps:
       - name: Update files
-        uses: ISicily/dts-rebuild-action@main
+        uses: jchartrand/ISicily-myFork@main
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
