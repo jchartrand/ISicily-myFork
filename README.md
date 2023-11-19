@@ -1,4 +1,4 @@
-# ISicily
+# ISicily  
 *I.Sicily* is a project to build and maintain a TEI-XML EpiDoc corpus of the inscriptions of ancient Sicily. The public data can be accessed through a web interface at http://sicily.classics.ox.ac.uk.
 More information on the project and the data can be found at http://isicily.org, as well as on the [wiki](https://github.com/ISicily/ISicily/wiki) of this repository. *I.Sicily* is now part of the ERC-funded [*Crossreads* project](http://crossreads.web.ox.ac.uk), contributing to wide-ranging study of the epigraphic culture of ancient Sicily.
 The EpiDoc files in this repository constitute the core public dataset of the project and are subject to continuous update and revision.
