@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-var Buffer = require('buffer/').Buffer
+const {Base64} = require('js-base64');
 
 const main = async () => {
   try {
@@ -40,7 +40,8 @@ async function saveFileToGithub(owner, repo, fileContentsAsString) {
     try {
         const sha = await getManifestSha(owner, repo, "collection.json")
         let path = `collection.json`
-        let content = Buffer.from(fileContentsAsString).toString('base64')
+       // let content = Buffer.from(fileContentsAsString).toString('base64')
+       let content = Base64.encode(fileContentsAsString)
         let message = "update collection"
         let config = {owner, repo, path, message, content, ...(sha && {sha})}
         const result = await github.rest.repos.createOrUpdateFileContents(config)
