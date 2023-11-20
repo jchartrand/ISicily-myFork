@@ -30691,7 +30691,7 @@ const main = async () => {
 
     const theCommit = await octokit.rest.git.getCommit({owner, repo, commit_sha});
    
-   saveFileToGithub(owner, repo, theCommit.toString(), octokit)
+    saveFileToGithub(owner, repo, JSON.stringify(theCommit), octokit)
 
 
   } catch (error) {
@@ -30705,7 +30705,7 @@ async function getManifestSha(owner, repo, path, octokit) {
     const response = await octokit.rest.repos.getContent({owner, repo, path})
     sha = response.data.sha
   } catch (e) {
-    console.log(`Problem saving file ${path} back to the Github repository ${owner}/${repo}: ${e}`);
+    console.log(`Couldn't find ${path} in Github repository ${owner}/${repo}: ${e}`);
   }
     return sha
 }
