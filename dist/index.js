@@ -30705,9 +30705,9 @@ async function getManifestSha(owner, repo, path) {
 }
 
 async function saveFileToGithub(owner, repo, fileContentsAsString) {
+  let path = `collection.json`
     try {
         const sha = await getManifestSha(owner, repo, "collection.json")
-        let path = `collection.json`
        // let content = Buffer.from(fileContentsAsString).toString('base64')
        let content = Base64.encode(fileContentsAsString)
        let message = "update collection"
