@@ -7,7 +7,7 @@ const main = async () => {
 
     const owner = core.getInput('owner', { required: true });
     const repo = core.getInput('repo', { required: true });
-    //const sha = core.getInput('sha', {required: true});
+    const commitSha = core.getInput('sha', {required: true});
     const token = core.getInput('token', { required: true });
 
     const octokit = new github.getOctokit(token);
