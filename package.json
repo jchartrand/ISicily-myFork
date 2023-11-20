@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-action": "ncc build index.js -o dist"
+    "buijld-action": "ncc build index.js -o dist"
   },
   "keywords": [],
   "author": "",

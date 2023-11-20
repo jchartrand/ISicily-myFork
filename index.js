@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-//const {Base64} = require('js-base64');
+const {Base64} = require('js-base64');
 
 const main = async () => {
   try {
