@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const {Base64} = require('js-base64');
+//const {Base64} = require('js-base64');
 
 const main = async () => {
   try {
@@ -22,8 +22,8 @@ const main = async () => {
      * - add each new collection entry, or replace existing entry for the inscription.
      * 
      */
-    const theCommit = await octokit.rest.git.getCommit({owner, repo, sha});
-    saveFileToGithub(owner, repo, theCommit.toString())
+   // const theCommit = await octokit.rest.git.getCommit({owner, repo, sha});
+   // saveFileToGithub(owner, repo, theCommit.toString())
 
 
   } catch (error) {
@@ -38,13 +38,13 @@ async function getManifestSha(owner, repo, path) {
 
 async function saveFileToGithub(owner, repo, fileContentsAsString) {
     try {
-        const sha = await getManifestSha(owner, repo, "collection.json")
+        //const sha = await getManifestSha(owner, repo, "collection.json")
         let path = `collection.json`
        // let content = Buffer.from(fileContentsAsString).toString('base64')
-       let content = Base64.encode(fileContentsAsString)
-        let message = "update collection"
-        let config = {owner, repo, path, message, content, ...(sha && {sha})}
-        const result = await github.rest.repos.createOrUpdateFileContents(config)
+       //let content = Base64.encode(fileContentsAsString)
+       // let message = "update collection"
+       // let config = {owner, repo, path, message, content, ...(sha && {sha})}
+       // const result = await github.rest.repos.createOrUpdateFileContents(config)
     } catch (e) {
         console.log(`Problem saving file ${path} back to the Github repository: ${e}`);
     }
