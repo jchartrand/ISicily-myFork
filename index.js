@@ -35,7 +35,7 @@ const main = async () => {
 }
 
 async function getManifestSha(owner, repo, path) {
-    const { data: { sha } } = await github.repos.getContent({owner, repo, path})
+    const { data: { sha } } = await github.rest.repos.getContent({owner, repo, path})
     return sha
 }
 
