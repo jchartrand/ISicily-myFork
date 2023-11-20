@@ -26,7 +26,7 @@ const main = async () => {
 
     const theCommit = await octokit.rest.git.getCommit({owner, repo, commit_sha});
    
-   saveFileToGithub(owner, repo, theCommit.toString())
+   saveFileToGithub(owner, repo, theCommit.toString(), octokit)
 
 
   } catch (error) {
@@ -34,20 +34,20 @@ const main = async () => {
   }
 }
 
-async function getManifestSha(owner, repo, path) {
-    const { data: { sha } } = await github.rest.repos.getContent({owner, repo, path})
+async function getManifestSha(owner, repo, path, octokit) {
+    const { data: { sha } } = await octokit.rest.repos.getContent({owner, repo, path})
     return sha
 }
 
-async function saveFileToGithub(owner, repo, fileContentsAsString) {
+async function saveFileToGithub(owner, repo, fileContentsAsString, octokit) {
   let path = `collection.json`
     try {
-        const sha = await getManifestSha(owner, repo, "collection.json")
+        const sha = await getManifestSha(owner, repo, "collection.json", octokit)
        // let content = Buffer.from(fileContentsAsString).toString('base64')
        let content = Base64.encode(fileContentsAsString)
        let message = "update collection"
        let config = {owner, repo, path, message, content, ...(sha && {sha})}
-       const result = await github.rest.repos.createOrUpdateFileContents(config)
+       const result = await octokit.rest.repos.createOrUpdateFileContents(config)
     } catch (e) {
         console.log(`Problem saving file ${path} back to the Github repository: ${e}`);
     }
