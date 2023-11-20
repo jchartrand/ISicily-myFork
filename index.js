@@ -23,13 +23,19 @@ const main = async () => {
      * 
      */
 
-
-    const theCommit = await octokit.rest.git.getCommit({owner, repo, commit_sha});
+    // NOTE: the ref here is the triggering commit sha, but could be
+    // any reference, like the head of the master branch (heads/BRANCH_NAME) or a
+    // tag name (tags/TAG_NAME)
+    const theCommit = await octokit.rest.repos.getCommit({owner, repo, ref: commit_sha});
+    
+    //octokit.rest.git.getCommit({owner, repo, commit_sha});
    
     saveFileToGithub(owner, repo, JSON.stringify(theCommit), octokit)
 
 
   } catch (error) {
+    console.log("error when trying to get the commit?????")
+    console.log(error)
     core.setFailed(error.message);
   }
 }
