@@ -30687,8 +30687,11 @@ const main = async () => {
      * - add each new collection entry, or replace existing entry for the inscription.
      * 
      */
+  /*   THIS NEXT LINE IS THE PROBLEM.  IT IS RETURNING AN ERROR: NOT FOUND
+    WHICH IS MAYBE BECAUSE THE SHA I'M TRYING TO USE may well NOT BE A COMMIT SHA.
+    just need to find out how to get the commit sha for pushed commit.  */
     const theCommit = await octokit.rest.git.getCommit({owner, repo, sha: commitSha});
-    console.log(theCommit)
+    //console.log(theCommit)
    // saveFileToGithub(owner, repo, theCommit.toString())
 
 

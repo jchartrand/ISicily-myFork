@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Updates collection files
     steps:
+      - name: Show GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Update files
         uses: jchartrand/ISicily-myFork@master
         with:
