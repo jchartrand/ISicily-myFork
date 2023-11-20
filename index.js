@@ -22,7 +22,7 @@ const main = async () => {
      * - add each new collection entry, or replace existing entry for the inscription.
      * 
      */
-    const theCommit = await octokit.rest.git.getCommit({owner, repo, sha});
+    const theCommit = await octokit.rest.git.getCommit({owner, repo, sha: commitSha});
     console.log(theCommit)
    // saveFileToGithub(owner, repo, theCommit.toString())
 
