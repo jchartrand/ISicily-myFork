@@ -30672,7 +30672,7 @@ const main = async () => {
 
     const owner = core.getInput('owner', { required: true });
     const repo = core.getInput('repo', { required: true });
-    const commitSha = core.getInput('sha', {required: true});
+    const commit_sha = core.getInput('sha', {required: true});
     const token = core.getInput('token', { required: true });
 
     const octokit = new github.getOctokit(token);
@@ -30689,8 +30689,12 @@ const main = async () => {
      */
   /*   THIS NEXT LINE IS THE PROBLEM.  IT IS RETURNING AN ERROR: NOT FOUND
     WHICH IS MAYBE BECAUSE THE SHA I'M TRYING TO USE may well NOT BE A COMMIT SHA.
-    just need to find out how to get the commit sha for pushed commit.  */
-    const theCommit = await octokit.rest.git.getCommit({owner, repo, sha: commitSha});
+    just need to find out how to get the commit sha for pushed commit.  
+  
+    OR maybe the octokit.rest.git.getCommit call isn't a real call??????? */
+   
+
+    const theCommit = await octokit.rest.git.getCommit({owner, repo, commit_sha});
     //console.log(theCommit)
    // saveFileToGithub(owner, repo, theCommit.toString())
 
