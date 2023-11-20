@@ -22,16 +22,11 @@ const main = async () => {
      * - add each new collection entry, or replace existing entry for the inscription.
      * 
      */
-  /*   THIS NEXT LINE IS THE PROBLEM.  IT IS RETURNING AN ERROR: NOT FOUND
-    WHICH IS MAYBE BECAUSE THE SHA I'M TRYING TO USE may well NOT BE A COMMIT SHA.
-    just need to find out how to get the commit sha for pushed commit.  
-  
-    OR maybe the octokit.rest.git.getCommit call isn't a real call??????? */
-   
+
 
     const theCommit = await octokit.rest.git.getCommit({owner, repo, commit_sha});
-    //console.log(theCommit)
-   // saveFileToGithub(owner, repo, theCommit.toString())
+   
+   saveFileToGithub(owner, repo, theCommit.toString())
 
 
   } catch (error) {
@@ -46,13 +41,13 @@ async function getManifestSha(owner, repo, path) {
 
 async function saveFileToGithub(owner, repo, fileContentsAsString) {
     try {
-        //const sha = await getManifestSha(owner, repo, "collection.json")
+        const sha = await getManifestSha(owner, repo, "collection.json")
         let path = `collection.json`
        // let content = Buffer.from(fileContentsAsString).toString('base64')
-       //let content = Base64.encode(fileContentsAsString)
-       // let message = "update collection"
-       // let config = {owner, repo, path, message, content, ...(sha && {sha})}
-       // const result = await github.rest.repos.createOrUpdateFileContents(config)
+       let content = Base64.encode(fileContentsAsString)
+       let message = "update collection"
+       let config = {owner, repo, path, message, content, ...(sha && {sha})}
+       const result = await github.rest.repos.createOrUpdateFileContents(config)
     } catch (e) {
         console.log(`Problem saving file ${path} back to the Github repository: ${e}`);
     }
