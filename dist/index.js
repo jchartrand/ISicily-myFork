@@ -61378,29 +61378,23 @@ const main = async () => {
 
     const owner = core.getInput('owner', { required: true });
     const repo = core.getInput('repo', { required: true });
-    const commit_sha = core.getInput('sha', {required: true});
     const token = core.getInput('token', { required: true });
 
     const octokit = new github.getOctokit(token);
 
     const lastCommit = await octokit.rest.repos.getCommit({owner, repo, ref: 'heads/master'});
-
-    console.log("the last commit date:")
-    console.log(lastCommit.data.commit.committer.date)
     const commitTimestamp = Date.parse(lastCommit.data.commit.committer.date)
-    console.log("Commit was more than 5 minutes ago:")
     var now =  new Date();
 
-// 86400 seconds in 24hrs
-// and so 86400000 milliseconds in 24hr
+    // 86400000 milliseconds in 24hr
+    // 300000 milliseconds in five minutes
 
-// 60000 milliseconds in a minute 
-// 300000 milliseconds in five minutes
-if(300000 < now.getTime()-commitTimestamp) {
-  console.log("true")
-} else {
-  console.log('false')
-}
+    if(300000 < now.getTime()-commitTimestamp) {
+      console.log("A commit occurred in the last 24 hours so running build...")
+    } else {
+      console.log('A commit did not occur in the last 24 hours so exiting without rebuild.');
+      return
+    }
 
     const {collectionFileAsString, errors} = await dtsUtils.createDTSCollection(owner, repo, octokit)
     
@@ -61411,7 +61405,7 @@ if(300000 < now.getTime()-commitTimestamp) {
 
 
   } catch (error) {
-    console.log("error when trying to get the commit?????")
+    console.log("error when running the rebuild")
     console.log(error)
     core.setFailed(error.message);
   }
