@@ -77,7 +77,7 @@ const createDTSMemberEntry = async (githubEntry) => {
 
 async function getInscriptionsList(owner, repo, octokit) {
   console.log('started')
-  let repoContents = await octokit.repos.getContent({owner, repo})
+  let repoContents = await octokit.rest.repos.getContent({owner, repo})
 		let treeSHA = repoContents.data.find(entry=>entry.path === 'inscriptions').sha
 		let githubResponse = await octokit.rest.git.getTree(
 			{
