@@ -10,7 +10,7 @@
 	<principal ref="#TS">Thea Sommerschield</principal>
             <funder>John Fell OUP Research Fund</funder>
             <funder><ref target="https://cordis.europa.eu/project/id/885040">ERC Advanced Grant no.885040</ref></funder>
-            <respStmt>
+            <respStmt> 
                <name xml:id="TS" ref="0000-0002-6965-8105">Thea Sommerschield</name>
                <resp>original data collection, research and file creation</resp>
             </respStmt>
