@@ -3,7 +3,7 @@ name: update IIIF collection
 on:
   schedule: 
       - cron: '42 2 * * *'
-      - cron: '27,29,39 20 * * *'
+      - cron: '30,37,49 20 * * *'
 jobs:
 
   update-collection:
