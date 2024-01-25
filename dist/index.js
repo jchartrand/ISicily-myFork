@@ -61387,12 +61387,12 @@ const main = async () => {
     var now =  new Date();
 
     // 86400000 milliseconds in 24hr
-    // 300000 milliseconds in five minutes
+    // 600000 milliseconds in ten minutes
 
-    if(300000 < now.getTime()-commitTimestamp) {
-      console.log("A commit occurred in the last 24 hours so running build...")
+    if(600000 < now.getTime()-commitTimestamp) {
+      console.log("A commit occurred in the last ten minutes so running build...")
     } else {
-      console.log('A commit did not occur in the last 24 hours so exiting without rebuild.');
+      console.log('A commit did not occur in the last 10 minutes so exiting without rebuild.');
       return
     }
 
