@@ -32,7 +32,7 @@ const main = async () => {
     //octokit.rest.git.getCommit({owner, repo, commit_sha});
    
     
-    const collectionFileAsString = dtsUtils.createDTSCollection(owner, repo, octokit)
+    const collectionFileAsString = await dtsUtils.createDTSCollection(owner, repo, octokit)
     saveFileToGithub(owner, repo, collectionFileAsString, octokit)
 
 
