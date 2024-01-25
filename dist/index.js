@@ -61405,9 +61405,9 @@ const main = async () => {
     console.log(lastCommit)
 
     const {collectionFileAsString, errors} = await dtsUtils.createDTSCollection(owner, repo, octokit)
-    saveFileToGithub(owner, repo, collectionFileAsString, "collection.json", "update collection", octokit)
+    await saveFileToGithub(owner, repo, collectionFileAsString, "collection.json", "update collection", octokit)
     if (errors.length) {
-      saveFileToGithub(owner, repo, JSON.stringify(errors), "errors.json", "save errors from collection update", octokit)
+      await saveFileToGithub(owner, repo, JSON.stringify(errors), "errors.json", "save errors from collection update", octokit)
     }
 
 
