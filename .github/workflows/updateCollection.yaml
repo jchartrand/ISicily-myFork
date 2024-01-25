@@ -2,14 +2,14 @@ name: update DTS collection file
 on:
   schedule: 
       - cron: '42 2 * * *'
-      - cron: '15,22,33 21 * * *'
+      - cron: '25,32,44 21 * * *'
 jobs:
   update-collection:
     runs-on: ubuntu-latest
     name: Updates collection file
     steps:
       - name: Update files
-        uses: I.Sicily/dts-rebuild-action@main
+        uses: ISicily/dts-rebuild-action@main
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
