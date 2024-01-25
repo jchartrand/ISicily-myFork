@@ -62,7 +62,7 @@ const createDTSMemberEntry = async (githubEntry, errors) => {
     } catch (e) {
         console.log(`Problem with inscription at ${downloadURL}`)
         console.log(e)
-        errors.append(`Problem with inscription at ${downloadURL}`)
+        errors.push(`Problem with inscription at ${downloadURL}`)
     }
     //if (githubEntry.path === 'ISic000001.xml') console.log(util.inspect(inscription, false, null));
     if (inscription && inscription.TEI) {
