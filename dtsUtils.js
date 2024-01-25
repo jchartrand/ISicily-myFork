@@ -1,10 +1,9 @@
-var express = require('express');
-const { Octokit } = require("@octokit/rest");
+//const { Octokit } = require("@octokit/rest");
 const axios = require('axios');
 const _ = require('lodash')
 //var util = require('util')
 var xml2js = require('xml2js');
-const github = new Octokit();
+//const github = new Octokit();
 const collectionTemplate = require("./collection-template.js")
 const inscriptionTemplate = require("./inscription-template.js")
 
@@ -34,11 +33,11 @@ const createDTSMemberEntry = async (githubEntry) => {
   
 }
 
-async function getInscriptionsList(owner, repo) {
+async function getInscriptionsList(owner, repo, octokit) {
   console.log('started')
-  let repoContents = await github.repos.getContent({owner, repo})
+  let repoContents = await octokit.repos.getContent({owner, repo})
 		let treeSHA = repoContents.data.find(entry=>entry.path === 'inscriptions').sha
-		let githubResponse = await github.rest.git.getTree(
+		let githubResponse = await octokit.rest.git.getTree(
 			{
 				owner,
 				repo,
@@ -49,9 +48,9 @@ async function getInscriptionsList(owner, repo) {
 		return githubResponse.data.tree
 }
 
-async function createDTSCollection(owner, repo) {
+async function createDTSCollection(owner, repo, octokit) {
   let dtsRecord = _.cloneDeep(collectionTemplate)
-  const inscriptionsList = await getInscriptionsList(owner, repo) 
+  const inscriptionsList = await getInscriptionsList(owner, repo, octokit) 
   dtsRecord.totalItems = inscriptionsList.length
   dtsRecord['dts:totalChildren'] = inscriptionsList.length
   for (const repoFile of inscriptionsList) {
