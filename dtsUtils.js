@@ -8,7 +8,7 @@ const collectionTemplate = require("./collection-template.js")
 const inscriptionTemplate = require("./inscription-template.js")
 
 
-const createDTSMemberEntry = async (githubEntry) => {
+const createDTSMemberEntry = async (githubEntry, errors) => {
   const path = githubEntry.path
   const id = path.slice(0, -4)
   const downloadURL = `https://raw.githubusercontent.com/ISicily/ISicily/master/inscriptions/${path}`
@@ -18,8 +18,9 @@ const createDTSMemberEntry = async (githubEntry) => {
     try {
          inscription = await parser.parseStringPromise(epidoc.data)
     } catch (e) {
-        console.log(`problem with inscription at ${downloadURL}`)
+        console.log(`Problem with inscription at ${downloadURL}`)
         console.log(e)
+        errors.append(`Problem with inscription at ${downloadURL}`)
     }
     //if (githubEntry.path === 'ISic000001.xml') console.log(util.inspect(inscription, false, null));
     if (inscription && inscription.TEI) {
@@ -55,28 +56,22 @@ async function getInscriptionsList(owner, repo, octokit) {
 }
 
 async function createDTSCollection(owner, repo, octokit) {
+  const errors = []
   let dtsRecord = _.cloneDeep(collectionTemplate)
   const inscriptionsList = await getInscriptionsList(owner, repo, octokit) 
-  dtsRecord.totalItems = inscriptionsList.length
-  dtsRecord['dts:totalChildren'] = inscriptionsList.length
   for (const repoFile of inscriptionsList) {
-   // if (repoFile.path.endsWith('ISic000001.xml')) {
-      let memberEntry = await createDTSMemberEntry(repoFile)
-      if (dtsRecord) dtsRecord.member.push(memberEntry);
-   // }
+    if (repoFile.path.endsWith('ISic000002.xml') || repoFile.path.endsWith('ISic000001.xml') || repoFile.path.endsWith('ISic000003.xml')) {
+      let memberEntry = await createDTSMemberEntry(repoFile, errors)
+      if (memberEntry) dtsRecord.member.push(memberEntry);
+    }
   }
-  return JSON.stringify(dtsRecord)
+  dtsRecord.totalItems = dtsRecord.member.length
+  dtsRecord['dts:totalChildren'] = dtsRecord.member.length
+  return {collectionFileAsString: JSON.stringify(dtsRecord), errors}
 }
 
-async function updateDTSCollection(commit){
-  // this will check the commit to see if there are more than maybe 300 changes.
-  // If more call createDTSCollection
-  // If fewer then do pretty much what createDTSCollection does but
-  // rather than usig getInscriptionList for the loop, use the changed files in the commit.
-  
-}
+
 
 module.exports = {
-  createDTSCollection,
-  updateDTSCollection
+  createDTSCollection
 }

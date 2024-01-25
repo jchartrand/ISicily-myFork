@@ -27,13 +27,18 @@ const main = async () => {
     // NOTE: the ref here is the triggering commit sha, but could be
     // any reference, like the head of the master branch (heads/BRANCH_NAME) or a
     // tag name (tags/TAG_NAME)
-    const theCommit = await octokit.rest.repos.getCommit({owner, repo, ref: commit_sha});
+    //const theCommit = await octokit.rest.repos.getCommit({owner, repo, ref: commit_sha});
     
-    //octokit.rest.git.getCommit({owner, repo, commit_sha});
-   
-    
-    const collectionFileAsString = await dtsUtils.createDTSCollection(owner, repo, octokit)
-    saveFileToGithub(owner, repo, collectionFileAsString, octokit)
+    const lastCommit = await octokit.rest.repos.getCommit({owner, repo, ref: 'heads/master'});
+
+    console.log("the last commit:")
+    console.log(lastCommit)
+
+    const {collectionFileAsString, errors} = await dtsUtils.createDTSCollection(owner, repo, octokit)
+    saveFileToGithub(owner, repo, collectionFileAsString, "collection.json", "update collection", octokit)
+    if (errors.length) {
+      saveFileToGithub(owner, repo, JSON.stringify(errors), "errors.json", "save errors from collection update", octokit)
+    }
 
 
   } catch (error) {
@@ -54,13 +59,11 @@ async function getManifestSha(owner, repo, path, octokit) {
     return sha
 }
 
-async function saveFileToGithub(owner, repo, fileContentsAsString, octokit) {
-  let path = `collection.json`
+async function saveFileToGithub(owner, repo, fileContentsAsString, path, octokit) {
     try {
-        const sha = await getManifestSha(owner, repo, "collection.json", octokit)
+        const sha = await getManifestSha(owner, repo, path, message, octokit)
        // let content = Buffer.from(fileContentsAsString).toString('base64')
        let content = Base64.encode(fileContentsAsString)
-       let message = "update collection"
        let config = {owner, repo, path, message, content, ...(sha && {sha})}
        const result = await octokit.rest.repos.createOrUpdateFileContents(config)
     } catch (e) {

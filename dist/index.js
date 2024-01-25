@@ -50,7 +50,7 @@ const collectionTemplate = __nccwpck_require__(9376)
 const inscriptionTemplate = __nccwpck_require__(2059)
 
 
-const createDTSMemberEntry = async (githubEntry) => {
+const createDTSMemberEntry = async (githubEntry, errors) => {
   const path = githubEntry.path
   const id = path.slice(0, -4)
   const downloadURL = `https://raw.githubusercontent.com/ISicily/ISicily/master/inscriptions/${path}`
@@ -60,8 +60,9 @@ const createDTSMemberEntry = async (githubEntry) => {
     try {
          inscription = await parser.parseStringPromise(epidoc.data)
     } catch (e) {
-        console.log(`problem with inscription at ${downloadURL}`)
+        console.log(`Problem with inscription at ${downloadURL}`)
         console.log(e)
+        errors.append(`Problem with inscription at ${downloadURL}`)
     }
     //if (githubEntry.path === 'ISic000001.xml') console.log(util.inspect(inscription, false, null));
     if (inscription && inscription.TEI) {
@@ -97,30 +98,24 @@ async function getInscriptionsList(owner, repo, octokit) {
 }
 
 async function createDTSCollection(owner, repo, octokit) {
+  const errors = []
   let dtsRecord = _.cloneDeep(collectionTemplate)
   const inscriptionsList = await getInscriptionsList(owner, repo, octokit) 
-  dtsRecord.totalItems = inscriptionsList.length
-  dtsRecord['dts:totalChildren'] = inscriptionsList.length
   for (const repoFile of inscriptionsList) {
-   // if (repoFile.path.endsWith('ISic000001.xml')) {
-      let memberEntry = await createDTSMemberEntry(repoFile)
-      if (dtsRecord) dtsRecord.member.push(memberEntry);
-   // }
+    if (repoFile.path.endsWith('ISic000002.xml') || repoFile.path.endsWith('ISic000001.xml') || repoFile.path.endsWith('ISic000003.xml')) {
+      let memberEntry = await createDTSMemberEntry(repoFile, errors)
+      if (memberEntry) dtsRecord.member.push(memberEntry);
+    }
   }
-  return JSON.stringify(dtsRecord)
+  dtsRecord.totalItems = dtsRecord.member.length
+  dtsRecord['dts:totalChildren'] = dtsRecord.member.length
+  return {collectionFileAsString: JSON.stringify(dtsRecord), errors}
 }
 
-async function updateDTSCollection(commit){
-  // this will check the commit to see if there are more than maybe 300 changes.
-  // If more call createDTSCollection
-  // If fewer then do pretty much what createDTSCollection does but
-  // rather than usig getInscriptionList for the loop, use the changed files in the commit.
-  
-}
+
 
 module.exports = {
-  createDTSCollection,
-  updateDTSCollection
+  createDTSCollection
 }
 
 /***/ }),
@@ -61402,13 +61397,18 @@ const main = async () => {
     // NOTE: the ref here is the triggering commit sha, but could be
     // any reference, like the head of the master branch (heads/BRANCH_NAME) or a
     // tag name (tags/TAG_NAME)
-    const theCommit = await octokit.rest.repos.getCommit({owner, repo, ref: commit_sha});
+    //const theCommit = await octokit.rest.repos.getCommit({owner, repo, ref: commit_sha});
     
-    //octokit.rest.git.getCommit({owner, repo, commit_sha});
-   
-    
-    const collectionFileAsString = await dtsUtils.createDTSCollection(owner, repo, octokit)
-    saveFileToGithub(owner, repo, collectionFileAsString, octokit)
+    const lastCommit = await octokit.rest.repos.getCommit({owner, repo, ref: 'heads/master'});
+
+    console.log("the last commit:")
+    console.log(lastCommit)
+
+    const {collectionFileAsString, errors} = await dtsUtils.createDTSCollection(owner, repo, octokit)
+    saveFileToGithub(owner, repo, collectionFileAsString, "collection.json", "update collection", octokit)
+    if (errors.length) {
+      saveFileToGithub(owner, repo, JSON.stringify(errors), "errors.json", "save errors from collection update", octokit)
+    }
 
 
   } catch (error) {
@@ -61429,13 +61429,11 @@ async function getManifestSha(owner, repo, path, octokit) {
     return sha
 }
 
-async function saveFileToGithub(owner, repo, fileContentsAsString, octokit) {
-  let path = `collection.json`
+async function saveFileToGithub(owner, repo, fileContentsAsString, path, octokit) {
     try {
-        const sha = await getManifestSha(owner, repo, "collection.json", octokit)
+        const sha = await getManifestSha(owner, repo, path, message, octokit)
        // let content = Buffer.from(fileContentsAsString).toString('base64')
        let content = Base64.encode(fileContentsAsString)
-       let message = "update collection"
        let config = {owner, repo, path, message, content, ...(sha && {sha})}
        const result = await octokit.rest.repos.createOrUpdateFileContents(config)
     } catch (e) {
