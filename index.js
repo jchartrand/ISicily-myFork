@@ -67,7 +67,7 @@ async function saveFileToGithub(owner, repo, fileContentsAsString, path, message
       console.log(path)
       console.log("the file content:")
       console.log(fileContentsAsString)
-        const sha = await getManifestSha(owner, repo, path, message, octokit)
+        const sha = await getManifestSha(owner, repo, path, octokit)
        // let content = Buffer.from(fileContentsAsString).toString('base64')
        let content = Base64.encode(fileContentsAsString)
        let config = {owner, repo, path, message, content, ...(sha && {sha})}

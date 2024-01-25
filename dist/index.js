@@ -61405,6 +61405,8 @@ const main = async () => {
     console.log(lastCommit)
 
     const {collectionFileAsString, errors} = await dtsUtils.createDTSCollection(owner, repo, octokit)
+    
+    
     await saveFileToGithub(owner, repo, collectionFileAsString, "collection.json", "update collection", octokit)
     if (errors.length) {
       await saveFileToGithub(owner, repo, JSON.stringify(errors), "errors.json", "save errors from collection update", octokit)
@@ -61431,7 +61433,11 @@ async function getManifestSha(owner, repo, path, octokit) {
 
 async function saveFileToGithub(owner, repo, fileContentsAsString, path, message, octokit) {
     try {
-        const sha = await getManifestSha(owner, repo, path, message, octokit)
+      console.log("path:")
+      console.log(path)
+      console.log("the file content:")
+      console.log(fileContentsAsString)
+        const sha = await getManifestSha(owner, repo, path, octokit)
        // let content = Buffer.from(fileContentsAsString).toString('base64')
        let content = Base64.encode(fileContentsAsString)
        let config = {owner, repo, path, message, content, ...(sha && {sha})}
