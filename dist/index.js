@@ -61429,7 +61429,7 @@ async function getManifestSha(owner, repo, path, octokit) {
     return sha
 }
 
-async function saveFileToGithub(owner, repo, fileContentsAsString, path, octokit) {
+async function saveFileToGithub(owner, repo, fileContentsAsString, path, message, octokit) {
     try {
         const sha = await getManifestSha(owner, repo, path, message, octokit)
        // let content = Buffer.from(fileContentsAsString).toString('base64')
