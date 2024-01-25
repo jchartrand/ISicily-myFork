@@ -13,29 +13,26 @@ const main = async () => {
 
     const octokit = new github.getOctokit(token);
 
-    /**
-     * 
-     * - get the previously stored collection file.
-     * - if one doesn't exist, rebuild entire collection, then exit.
-     * - if one does exist, get list of changes files (inscriptions) for the commit
-     * - if there are more than 100 changed files in the commit, rebuild all
-     * - if fewer than 100, then loop over changes files (inscriptions) generating a new collection entry for each.
-     * - add each new collection entry, or replace existing entry for the inscription.
-     * 
-     */
-
-    // NOTE: the ref here is the triggering commit sha, but could be
-    // any reference, like the head of the master branch (heads/BRANCH_NAME) or a
-    // tag name (tags/TAG_NAME)
-    //const theCommit = await octokit.rest.repos.getCommit({owner, repo, ref: commit_sha});
-    
     const lastCommit = await octokit.rest.repos.getCommit({owner, repo, ref: 'heads/master'});
 
-    console.log("the last commit:")
-    console.log(JSON.stringify(lastCommit))
+    console.log("the last commit date:")
+    console.log(lastCommit.data.commit.committer.date)
+    const commitDate = Date.parse(lastCommit.data.commit.committer.date)
+    console.log("Commit was more than 5 minutes ago:")
+    var now =  new Date();
+
+// 86400 seconds in 24hrs
+// and so 86400000 milliseconds in 24hr
+
+// 60000 milliseconds in a minute 
+// 300000 milliseconds in five minutes
+if(300000 < now.getTime()-commitDate.getTime()) {
+  console.log("true")
+} else {
+  console.log('false')
+}
 
     const {collectionFileAsString, errors} = await dtsUtils.createDTSCollection(owner, repo, octokit)
-    
     
     await saveFileToGithub(owner, repo, collectionFileAsString, "collection.json", "update collection", octokit)
     if (errors.length) {
