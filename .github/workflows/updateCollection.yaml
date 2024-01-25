@@ -1,10 +1,9 @@
 name: update IIIF collection
 
 on:
-  push:
-    branches:
-      - 'master'
-
+  schedule: 
+      - cron: '42 2 * * *'
+      - cron: '6 18 * * *'
 jobs:
 
   update-collection:
@@ -20,5 +19,4 @@ jobs:
         with:
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
-          sha: ${{ github.sha }}
           token: ${{ github.token }}
