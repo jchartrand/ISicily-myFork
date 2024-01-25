@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const {Base64} = require('js-base64');
+const dtsUtils = require('./dtsUtils.js')
 
 const main = async () => {
   try {
@@ -30,7 +31,9 @@ const main = async () => {
     
     //octokit.rest.git.getCommit({owner, repo, commit_sha});
    
-    saveFileToGithub(owner, repo, JSON.stringify(theCommit), octokit)
+    
+    const collectionFileAsString = dtsUtils.createDTSCollection(owner, repo)
+    saveFileToGithub(owner, repo, collectionFileAsString, octokit)
 
 
   } catch (error) {

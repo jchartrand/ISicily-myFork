@@ -1,6 +1,170 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ 9376:
+/***/ ((module) => {
+
+const template = {
+    "@context": {
+        "@vocab": "https://www.w3.org/ns/hydra/core#",
+        "dc": "http://purl.org/dc/terms/",
+        "dts": "https://w3id.org/dts/api#",
+    },
+    "@id": "http://http://sicily.classics.ox.ac.uk",
+    "@type": "Collection",
+    "title" : "I.Sicily",
+    "dts:dublincore": {
+        "dc:type": ["http://purl.org/dc/dcmitype/Collection"],
+        "dc:creator": [
+            {"@language": "en", "@value": "Various"}
+        ],
+        "dc:language": ["en"],
+        "dc:title": [{"@language": "en", "@value": "I.Sicily"}],
+        "dc:description": [{
+           "@language": "en",
+            "@value": "A digital corpus of Sicilian inscriptions"
+        }]
+    },
+    "totalItems" : 0,
+    "dts:totalParents": 0,
+    "dts:totalChildren": 0,
+    "member": [
+        
+    ]
+}
+
+module.exports = template
+
+/***/ }),
+
+/***/ 2360:
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
+
+var express = __nccwpck_require__(7270);
+const { Octokit } = __nccwpck_require__(7043);
+const axios = __nccwpck_require__(3778);
+const _ = __nccwpck_require__(9361)
+//var util = require('util')
+var xml2js = __nccwpck_require__(4944);
+const github = new Octokit();
+const collectionTemplate = __nccwpck_require__(9376)
+const inscriptionTemplate = __nccwpck_require__(2059)
+
+
+const createDTSMemberEntry = async (githubEntry) => {
+  const path = githubEntry.path
+  const id = path.slice(0, -4)
+  const downloadURL = `https://raw.githubusercontent.com/ISicily/ISicily/master/inscriptions/${path}`
+    const epidoc = await axios.get(downloadURL);
+    var parser = new xml2js.Parser(/* options */);
+    const inscription = await parser.parseStringPromise(epidoc.data)
+    //if (githubEntry.path === 'ISic000001.xml') console.log(util.inspect(inscription, false, null));
+    if (inscription && inscription.TEI) {
+      let dtsMemberEntry =  _.cloneDeep(inscriptionTemplate, true);
+      const dc = dtsMemberEntry['dts:dublincore']
+      const description = inscription.TEI.teiHeader[0].fileDesc[0].titleStmt[0].title[0]
+      dtsMemberEntry.title = id
+      dc['dc:title'][0]['@value'] = id
+      dtsMemberEntry.description = description
+      dc['dc:description'][0]['@value'] = description
+      dtsMemberEntry['dts:download'] = downloadURL
+      dtsMemberEntry['@id'] = `http://sicily.classics.ox.ac.uk/inscription/${id}`
+      dtsMemberEntry['dts:passage'] = `/api/dts/documents?id=${id}`
+      return dtsMemberEntry
+    }
+    return null
+  
+}
+
+async function getInscriptionsList(owner, repo) {
+  console.log('started')
+  let repoContents = await github.repos.getContent({owner, repo})
+		let treeSHA = repoContents.data.find(entry=>entry.path === 'inscriptions').sha
+		let githubResponse = await github.rest.git.getTree(
+			{
+				owner,
+				repo,
+				tree_sha: treeSHA
+			}
+		)
+    console.log("finished")
+		return githubResponse.data.tree
+}
+
+async function createDTSCollection(owner, repo) {
+  let dtsRecord = _.cloneDeep(collectionTemplate)
+  const inscriptionsList = await getInscriptionsList(owner, repo) 
+  dtsRecord.totalItems = inscriptionsList.length
+  dtsRecord['dts:totalChildren'] = inscriptionsList.length
+  for (const repoFile of inscriptionsList) {
+   // if (repoFile.path.endsWith('ISic000001.xml')) {
+      let memberEntry = await createDTSMemberEntry(repoFile)
+      if (dtsRecord) dtsRecord.member.push(memberEntry);
+   // }
+  }
+  return JSON.stringify(dtsRecord)
+}
+
+async function updateDTSCollection(commit){
+  // this will check the commit to see if there are more than maybe 300 changes.
+  // If more call createDTSCollection
+  // If fewer then do pretty much what createDTSCollection does but
+  // rather than usig getInscriptionList for the loop, use the changed files in the commit.
+  
+}
+
+module.exports = {
+  createDTSCollection,
+  updateDTSCollection
+}
+
+/***/ }),
+
+/***/ 2059:
+/***/ ((module) => {
+
+const template = {
+    "@id" : "http://sicily.classics.ox.ac.uk/inscription/",
+    "@type": "Resource",
+    "title" : "inscription title goes here",
+    "description": "An inscription from ancient Sicily",
+    "totalItems": 0,
+    "dts:totalParents": 1,
+    "dts:totalChildren": 0,
+    "dts:dublincore": {
+        "dc:title": [{"@language": "en", "@value": "inscription title goes here"}],
+        "dc:description": [{
+           "@language": "en",
+           "@value": "An inscription from ancient Sicily"
+        }],
+        "dc:type": [
+            "dc:Text"
+        ],
+        "dc:creator": [
+            {"@language": "en", "@value": "I.Sicily Contributors"}
+        ],
+        "dc:contributor": ["I.Sicily Contributors"],
+        "dc:language": ["en"]
+    },
+    "dts:passage": "/api/dts/documents?id=",
+    "dts:download": "https://raw.githubusercontent.com/",
+    "dts:citeDepth": 2,
+    "dts:citeStructure": [
+        {
+            "dts:citeType": "inscription",
+            "dts:citeStructure": [
+                {
+                    "dts:citeType": "line"
+                }
+            ]
+        }
+    ]
+}
+
+module.exports = template
+
+/***/ }),
+
 /***/ 7351:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -28779,6 +28943,46 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 7043:
+/***/ ((module) => {
+
+module.exports = eval("require")("@octokit/rest");
+
+
+/***/ }),
+
+/***/ 3778:
+/***/ ((module) => {
+
+module.exports = eval("require")("axios");
+
+
+/***/ }),
+
+/***/ 7270:
+/***/ ((module) => {
+
+module.exports = eval("require")("express");
+
+
+/***/ }),
+
+/***/ 9361:
+/***/ ((module) => {
+
+module.exports = eval("require")("lodash");
+
+
+/***/ }),
+
+/***/ 4944:
+/***/ ((module) => {
+
+module.exports = eval("require")("xml2js");
+
+
+/***/ }),
+
 /***/ 9491:
 /***/ ((module) => {
 
@@ -30666,6 +30870,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const {Base64} = __nccwpck_require__(4139);
+const dtsUtils = __nccwpck_require__(2360)
 
 const main = async () => {
   try {
@@ -30695,7 +30900,9 @@ const main = async () => {
     
     //octokit.rest.git.getCommit({owner, repo, commit_sha});
    
-    saveFileToGithub(owner, repo, JSON.stringify(theCommit), octokit)
+    
+    const collectionFileAsString = dtsUtils.createDTSCollection(owner, repo)
+    saveFileToGithub(owner, repo, collectionFileAsString, octokit)
 
 
   } catch (error) {
