@@ -1,8 +1,7 @@
 name: update DTS collection file
 on:
   schedule: 
-      - cron: '42 2 * * *'
-      - cron: '5,12,24 22 * * *'
+      - cron: '12 1 * * *'
 jobs:
   update-collection:
     runs-on: ubuntu-latest
@@ -16,4 +15,4 @@ jobs:
           token: ${{ github.token }}
           collectionFile: dts/collection.json
           errorFile: dts/error.json
-          frequency: 600000
+          frequency: 86400000
