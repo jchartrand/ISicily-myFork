@@ -56,7 +56,13 @@ const createDTSMemberEntry = async (githubEntry) => {
   const downloadURL = `https://raw.githubusercontent.com/ISicily/ISicily/master/inscriptions/${path}`
     const epidoc = await axios.get(downloadURL);
     var parser = new xml2js.Parser(/* options */);
-    const inscription = await parser.parseStringPromise(epidoc.data)
+    let inscription;
+    try {
+         inscription = await parser.parseStringPromise(epidoc.data)
+    } catch (e) {
+        console.log(`problem with inscription at ${downloadURL}`)
+        console.log(e)
+    }
     //if (githubEntry.path === 'ISic000001.xml') console.log(util.inspect(inscription, false, null));
     if (inscription && inscription.TEI) {
       let dtsMemberEntry =  _.cloneDeep(inscriptionTemplate, true);
