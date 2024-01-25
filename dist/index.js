@@ -61387,7 +61387,7 @@ const main = async () => {
 
     console.log("the last commit date:")
     console.log(lastCommit.data.commit.committer.date)
-    const commitDate = Date.parse(lastCommit.data.commit.committer.date)
+    const commitTimestamp = Date.parse(lastCommit.data.commit.committer.date)
     console.log("Commit was more than 5 minutes ago:")
     var now =  new Date();
 
@@ -61396,7 +61396,7 @@ const main = async () => {
 
 // 60000 milliseconds in a minute 
 // 300000 milliseconds in five minutes
-if(300000 < now.getTime()-commitDate.getTime()) {
+if(300000 < now.getTime()-commitTimestamp) {
   console.log("true")
 } else {
   console.log('false')
