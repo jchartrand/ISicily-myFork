@@ -7,12 +7,9 @@ inputs:
   repo:
     description: 'The name of the repository'
     required: true
-  sha:
-    description: 'The commit sha'
-    required: true
   token:
     description: 'The token to use to access the GitHub API'
     required: true
 runs:
-  using: 'node16'
+  using: 'node20'
   main: 'dist/index.js'

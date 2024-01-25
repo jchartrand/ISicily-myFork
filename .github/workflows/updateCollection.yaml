@@ -3,17 +3,13 @@ name: update IIIF collection
 on:
   schedule: 
       - cron: '42 2 * * *'
-      - cron: '5,12,25 19 * * *'
+      - cron: '27,29,39 20 * * *'
 jobs:
 
   update-collection:
     runs-on: ubuntu-latest
     name: Updates collection files
     steps:
-      - name: Show GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
       - name: Update files
         uses: jchartrand/ISicily-myFork@master
         with:
