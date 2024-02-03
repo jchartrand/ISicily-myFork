@@ -2,8 +2,7 @@ name: update DTS collection file
 on:
   schedule: 
       - cron: '12 1 * * *'
-      - cron: '45 15 * * *'
-      - cron: '22 18 * * *'
+      - cron: '22 19 * * *'
 jobs:
   update-collection:
     runs-on: ubuntu-latest
@@ -16,6 +15,7 @@ jobs:
           repo: ${{ github.event.repository.name }}
           token: ${{ github.token }}
           collectionFile: dts/collection.json
-          basePublicURL: http://sicily.classics.ox.ac.uk/inscription/
+          permanentBaseInscriptionURI: http://sicily.classics.ox.ac.uk/inscription/
+          permanentBaseInscriptionDownloadURL: https://raw.githubusercontent.com/ISicily/ISicily/master/inscriptions/
           errorFile: dts/error.json
           frequency: 86400000
