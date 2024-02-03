@@ -15,11 +15,9 @@ const main = async () => {
     const lastCommit = await octokit.rest.repos.getCommit({owner, repo, ref: 'heads/master'});
     const commitTimestamp = Date.parse(lastCommit.data.commit.committer.date)
     var now =  new Date();
+    
 
-    // 86400000 milliseconds in 24hr
-    // 600000 milliseconds in ten minutes
-
-    if(600000 < now.getTime()-commitTimestamp) {
+    if(tenMinutesAsMilliseconds < now.getTime()-commitTimestamp) {
       console.log("A commit occurred in the last ten minutes so running build...")
     } else {
       console.log('A commit did not occur in the last 10 minutes so exiting without rebuild.');
