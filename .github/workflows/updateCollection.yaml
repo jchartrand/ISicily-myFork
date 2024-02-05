@@ -1,8 +1,8 @@
 name: update DTS collection file
 on:
   schedule: 
-      - cron: '12 1 * * *'
-      - cron: '35 17 * * *'
+      - cron: '50 1 * * *'
+      - cron: '35 12 * * *'
 jobs:
   update-collection:
     runs-on: ubuntu-latest
